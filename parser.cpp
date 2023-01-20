@@ -10,7 +10,7 @@ Parser::Parser()
 {
 	input = readInput();
 	symbol = scan();
-	result = -1000;
+	result = 0;
 }
 
 Parser::~Parser()
@@ -27,10 +27,8 @@ std::string Parser::readInput()
 void Parser::showResult()
 {	
 	result = e();
-	if(result == -1000)
-		std::cout << "Incorrect inputShow" << std::endl;
-	else
-		std::cout << "Result:" << " "<< result << std::endl;
+	
+	std::cout << "Result:" << " "<< result << std::endl;
 }
 
 int Parser::scan()
@@ -38,27 +36,6 @@ int Parser::scan()
 	while (1)
 	{
 		char token = input[0];
-		if (symbol == INT && token == '(')
-		{
-			std::cout << "Incorrect input" << std::endl;
-			exit(0);
-		}
-		if ((symbol == LBRACE || symbol == RBRACE) && token == '(')
-		{
-			std::cout << "Incorrect input" << std::endl;
-			exit(0);
-		}
-		if(token == '<'  && input[1] != '<')
-		{
-			std::cout << "Incorrect input" << std::endl;
-			exit(0);
-		}
-		if (token == '>' && input[1] != '>')
-		{
-			std::cout << "Incorrect input" << std::endl;
-			exit(0);
-		}
-
 		input.erase(0, 1);
 		if (token == '<')
 		{
@@ -106,6 +83,10 @@ int Parser::e()
 		symbol = scan();
 		resA |= t();
 	}
+	
+	if (symbol != END)
+		std::cout << "Incorrect input" << std::endl;
+	
 	return resA;
 }
 
