@@ -85,7 +85,10 @@ int Parser::e()
 	}
 	
 	if (symbol != END)
+	{
 		std::cout << "Incorrect input" << std::endl;
+		exit(-1);
+	}
 	
 	return resA;
 }
@@ -145,7 +148,7 @@ int Parser::f()
 		if (symbol != RBRACE)
 		{
 			std::cout << "Brace disballance" << std::endl;
-			exit(0);
+			exit(-1);
 		}
 		symbol = scan();
 		return resE;
@@ -159,6 +162,6 @@ int Parser::f()
 	else
 	{
 		std::cout << "Incorrect input" << std::endl;
-		exit(0);
+		exit(-1);
 	}
 }
