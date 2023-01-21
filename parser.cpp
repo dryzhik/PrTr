@@ -37,19 +37,20 @@ int Parser::scan()
 	{
 		char token = input[0];
 		input.erase(0, 1);
-		if (token == '<')
-		{
-			input.erase(0, 1);
-		}
-		if (token == '>')
-		{
-			input.erase(0, 1);
-		}
+		
 		if (token == ' ' || token == '\t' || token == '\n' || token == '\r') break;
 		else if (token == '|')  return BOR;
 		else if (token == '&')  return BAND;
-		else if (token == '<') return LSHIFT;
-		else if (token == '>') return RSHIFT;
+		else if (token == '<' && input[0] == '<')
+		{
+			input.erase(0, 1);
+			return LSHIFT;
+		}
+		else if (token == '>' && input[0] == '>')
+		{
+			input.erase(0, 1);
+			return RSHIFT;
+		}
 		else if (token == '~')  return TILDA;
 		else if (token == '(')  return LBRACE;
 		else if (token == ')')  return RBRACE;
