@@ -28,6 +28,12 @@ void Parser::showResult()
 {	
 	result = e();
 	
+	if (symbol != END)
+	{
+		std::cout << "Incorrect input" << std::endl;
+		exit(-1);
+	}
+	
 	std::cout << "Result:" << " "<< result << std::endl;
 }
 
@@ -83,12 +89,6 @@ int Parser::e()
 	{
 		symbol = scan();
 		resA |= t();
-	}
-	
-	if (symbol != END)
-	{
-		std::cout << "Incorrect input" << std::endl;
-		exit(-1);
 	}
 	
 	return resA;
